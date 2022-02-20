@@ -2,6 +2,8 @@ import './style.css'
 
 import * as THREE from 'three';
 
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+
 // 1. Scene - background
 const scene = new THREE.Scene();
 
@@ -33,13 +35,21 @@ const torus = new THREE.Mesh(geometry, material);
 scene.add(torus);
 
 // ps 0xffffff is a hex literal value in js
-const pointLight = new THREE.PointLight(0xffffff);
+const pointLight = new THREE.PointLight(0xffffff, 1, 100);
 //need lighting to see standard material (not just wireframe)
-pointLight.position.set(20, 20, 20);
+pointLight.position.set(15, 10, 10);
 
 const ambientLight = new THREE.AmbientLight(0xffffff);
 
 scene.add(pointLight, ambientLight);
+
+//now some helpers yay
+const sphereSize = 1;
+const pointlightHelper = new THREE.PointLightHelper(pointLight, sphereSize);
+const gridHelper = new THREE.GridHelper(200, 50);
+scene.add(pointlightHelper, gridHelper);
+
+const controls = new OrbitControls(camera, renderer.domElement);
 
 function animate () { // similar to a game loop in gamedev
   requestAnimationFrame(animate);
