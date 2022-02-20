@@ -25,7 +25,7 @@ const geometry = new THREE.TorusGeometry(10, 3, 16, 100);
 // 2. Material - the wrapping paper/texture for an object
 // to see wireframe, no lighting needed
 // const material = new THREE.MeshBasicMaterial ({ color: 0xFF6347, wireframe: true,}); 
-const material = new THREE.MeshStandardMaterial ({ color: 0xFF6347, wireframe: true,});
+const material = new THREE.MeshStandardMaterial ({ color: 0xFF6347});
 
 // 3. Mesh - geometry + the material
 const torus = new THREE.Mesh(geometry, material);
@@ -35,7 +35,7 @@ scene.add(torus);
 // ps 0xffffff is a hex literal value in js
 const pointLight = new THREE.PointLight(0xffffff);
 //need lighting to see standard material (not just wireframe)
-pointLight.position.set(5,5,5);
+pointLight.position.set(20, 20, 20);
 
 scene.add(pointLight);
 
