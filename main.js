@@ -37,7 +37,9 @@ const pointLight = new THREE.PointLight(0xffffff);
 //need lighting to see standard material (not just wireframe)
 pointLight.position.set(20, 20, 20);
 
-scene.add(pointLight);
+const ambientLight = new THREE.AmbientLight(0xffffff);
+
+scene.add(pointLight, ambientLight);
 
 function animate () { // similar to a game loop in gamedev
   requestAnimationFrame(animate);
