@@ -68,9 +68,39 @@ function addStar() {
 
 Array(200).fill().forEach(addStar); //make 200 stars dang
 
-//add space backgrd
+//add space backgrd (from unsplash https://unsplash.com/photos/ln5drpv_ImI)
 const spaceTexture = new THREE.TextureLoader().load('space-unsplash.jpg');
 scene.background = spaceTexture;
+
+//texture mapping - taking 2d pixels and mapping to a 3d geometry, adding diff textures to diff parts or materials
+// kinda like sprite mapping in gamedev? texture is more an image applied to a surface
+
+// avatar/headshot
+const paulTexture = new THREE.TextureLoader().load('paul.jpg');
+
+const paul = new THREE.Mesh(
+  new THREE.BoxGeometry(3,3,3),
+  new THREE.MeshBasicMaterial({ map: paulTexture})
+);
+
+scene.add(paul);
+
+// add a planet, texture map from: https://www.solarsystemscope.com/textures/
+const moonTexture = new THREE.TextureLoader().load('mars.jpg');
+// add a normal map to give it bumps: https://www.deviantart.com/samio85/art/Cite-Normal-Map-Inverse-459058966
+const normalTexture = new THREE.TextureLoader().load('normal.jpg');
+
+
+const moon = new THREE.Mesh(
+  new THREE.SphereGeometry(3,32,32),
+  new THREE.MeshStandardMaterial({
+    map: moonTexture,
+    normalMap: normalTexture,
+  })
+);
+
+scene.add(moon);
+
 
 function animate () { // similar to a game loop in gamedev
   requestAnimationFrame(animate);
