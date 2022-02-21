@@ -122,8 +122,8 @@ function moveCamera() {
   camera.rotation.y = t * -0.0002;
 }
 
-// document.body.onscroll = moveCamera;
-// moveCamera();
+document.body.onscroll = moveCamera;
+moveCamera();
 
 function animate () { // similar to a game loop in gamedev
   requestAnimationFrame(animate);
