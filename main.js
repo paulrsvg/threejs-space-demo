@@ -18,6 +18,7 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
 camera.position.setZ(30);
+camera.position.setX(-3);
 
 renderer.render(scene, camera);
 
@@ -33,6 +34,9 @@ const material = new THREE.MeshStandardMaterial ({ color: 0xFF6347});
 const torus = new THREE.Mesh(geometry, material);
 
 scene.add(torus);
+
+
+// Lights
 
 // ps 0xffffff is a hex literal value in js
 const pointLight = new THREE.PointLight(0xffffff, 1, 100);
@@ -101,6 +105,25 @@ const moon = new THREE.Mesh(
 
 scene.add(moon);
 
+moon.position.z = 30; // these do the same thing
+moon.position.setX(-10);
+
+function moveCamera() {
+  const t = document.body.getBoundingClientRect().top;
+  moon.rotation.x += 0.05;
+  moon.rotation.y += 0.075;
+  moon.rotation.z += 0.05;
+
+  paul.rotation.y += 0.01;
+  paul.rotation.z += 0.01;
+
+  camera.position.z = t * -0.01;
+  camera.position.x = t * -0.0002;
+  camera.rotation.y = t * -0.0002;
+}
+
+// document.body.onscroll = moveCamera;
+// moveCamera();
 
 function animate () { // similar to a game loop in gamedev
   requestAnimationFrame(animate);
@@ -109,6 +132,7 @@ function animate () { // similar to a game loop in gamedev
   torus.rotation.y += 0.005;
   torus.rotation.z += 0.01;
 
+  moon.rotation.y += 0.005;
   controls.update();
   renderer.render(scene, camera)
 }
