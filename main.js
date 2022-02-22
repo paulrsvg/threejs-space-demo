@@ -48,14 +48,14 @@ const ambientLight = new THREE.AmbientLight(0xffffff);
 scene.add(pointLight, ambientLight);
 
 //now some helpers yay
-const sphereSize = 1;
-const pointlightHelper = new THREE.PointLightHelper(pointLight, sphereSize);
-//gridhelper reminds me of battlezone grid haha
-const gridHelper = new THREE.GridHelper(200, 50);
-scene.add(pointlightHelper, gridHelper);
+// const sphereSize = 1;
+// const pointlightHelper = new THREE.PointLightHelper(pointLight, sphereSize);
+// gridhelper reminds me of battlezone grid haha
+// const gridHelper = new THREE.GridHelper(200, 50);
+// scene.add(pointlightHelper, gridHelper);
 
-// listen to dom events w/ mouse and update camera accordingly
-const controls = new OrbitControls(camera, renderer.domElement);
+// listen to dom events w/ mouse and update camera accordingly (good for testing, but don't need while scrolling)
+// const controls = new OrbitControls(camera, renderer.domElement);
 
 //TODO: learn how to do rainbows and make the color pink or purple - my daughter lol
 
@@ -108,6 +108,10 @@ scene.add(moon);
 moon.position.z = 30; // these do the same thing
 moon.position.setX(-10);
 
+paul.position.z = -5;
+paul.position.x = 2;
+
+// scrolling animation w/ camera mvmt
 function moveCamera() {
   const t = document.body.getBoundingClientRect().top;
   moon.rotation.x += 0.05;
@@ -133,7 +137,7 @@ function animate () { // similar to a game loop in gamedev
   torus.rotation.z += 0.01;
 
   moon.rotation.y += 0.005;
-  controls.update();
+  // controls.update();
   renderer.render(scene, camera)
 }
 
